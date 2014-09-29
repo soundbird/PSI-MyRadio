@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://java.sun.com/jsf/passthrough">
+<f:view contentType="text/html" />
+
+<h:head>
+	<meta charset="UTF-8" />
+	<title>MyRadio</title>
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+</h:head>
+
+<h:body class="container">
+	<div class="col-xs-3 center-block">
+		<h1 class="">Hello World</h1>
+		<h:form>
+			<fieldset>
+				<h:inputText id="email" value="#{usuarioMB.usuario.email}"/>
+				<h:inputText id="senha" value="#{usuarioMB.usuario.senha}" />
+				<h:commandButton value="Entrar" action="#{usuarioMB.autenticar}" />
+			</fieldset>
+		</h:form>
+	</div>
+	
+	<h:form>
+		<h:commandLink value="Criar Usuário" action="#{usuarioMB.cadastrar}" />
+	</h:form>
+</h:body>
+</html>

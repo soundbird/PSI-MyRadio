@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<f:view contentType="text/html" />
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Alterar Usuário</title>
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+</h:head>
+<h:body>
+	<h:form>
+		<fieldset>
+			<h:outputLabel value="Nome:"  for="nome"/>
+			<h:inputText id="nome" value="#{usuarioMB.usuario.nome}" />
+			<h:outputLabel value="Sobrenome:"  for="sobrenome"/>
+			<h:inputText id="sobrenome" value="#{usuarioMB.usuario.sobrenome}" />
+			<h:outputLabel value="Email:"  for="email"/>
+			<h:inputText id="email" value="#{usuarioMB.usuario.email}" />
+			<h:outputLabel value="Senha:"  for="senha"/>
+			<h:inputText id="senha" value="#{usuarioMB.usuario.senha}" />
+			<h:commandButton value="Salvar" action="#{usuarioMB.atualizar}" />
+		</fieldset>
+	</h:form>
+
+</h:body>
+</html>

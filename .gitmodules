@@ -1,6 +1,0 @@
-[submodule "src/web"]
-	path = src/web
-	url = https://github.com/soundbird/MyRadio
-[submodule "src/mobile"]
-	path = src/mobile
-	url = https://github.com/soundbird/MyRadioApp
