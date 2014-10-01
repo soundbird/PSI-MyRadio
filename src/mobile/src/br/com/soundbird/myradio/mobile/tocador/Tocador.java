@@ -60,7 +60,8 @@ public class Tocador extends Binder implements ITocador, OnCompletionListener {
 
 	@Override
 	public boolean tocando(ITocavel tocavel) {
-		return mTocando != null && mTocando.getClass() == tocavel.getClass() && mTocando.getId() == tocavel.getId();
+		return mMediaPlayer.isPlaying() &&
+				mTocando != null && mTocando.getClass() == tocavel.getClass() && mTocando.getId() == tocavel.getId();
 	}
 	
 	public void fechar() {
