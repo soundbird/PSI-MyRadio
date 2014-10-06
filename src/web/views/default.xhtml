@@ -12,6 +12,8 @@
 </h:head>
 
 <h:body class="container">
+	<h:outputText class="alert-warning" rendered="#{usuarioMB.mensagem != null}" value="#{usuarioMB.mensagem}" />
+
 	<div class="col-xs-3 center-block">
 		<h1 class="">Hello World</h1>
 		<h:form>

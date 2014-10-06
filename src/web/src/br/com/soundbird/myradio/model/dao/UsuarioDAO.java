@@ -3,7 +3,7 @@ package br.com.soundbird.myradio.model.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.LockModeType;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import br.com.soundbird.myradio.model.bean.Usuario;
@@ -19,7 +19,7 @@ public class UsuarioDAO {
 	public void cadastrar(Usuario usuario) {
 		entityManager.persist(usuario);
 	}
-	
+
 	public void alterar(Usuario usuario) {
 		entityManager.merge(usuario);
 	}
@@ -33,7 +33,7 @@ public class UsuarioDAO {
 		return entityManager.getReference(Usuario.class, id);
 	}
 	
-	public Usuario consultarEmail(String email) {
+	public Usuario consultarEmail(String email) throws NoResultException {
 		String jpql = "SELECT u FROM Usuario u WHERE u.email = :email";
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("email", email);
