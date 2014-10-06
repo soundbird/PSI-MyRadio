@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://java.sun.com/jsf/passthrough">
+<f:view contentType="text/html" />
+
+<h:head>
+	<meta charset="UTF-8" />
+	<title>MyRadio</title>
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+</h:head>
+
+<h:body class="container">
+	<div class="row">
+		<h:outputText class="col-xs-8 col-xs-offset-2 alert-warning" rendered="#{usuarioMB.mensagem != null}" value="#{usuarioMB.mensagem}" />
+	<h:form class="col-xs-2 col-xs-offset-10">
+		<h:commandLink value="Criar Usuário" action="#{usuarioMB.cadastrar}" />
+	</h:form>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-4 col-xs-offset-4">
+			<h1 class="">Acesse ao myRadio</h1>
+			<h:form role="form">
+				<fieldset>
+					<div class="form-group">
+						<h:inputText id="email" class="form-control" value="#{usuarioMB.usuario.email}" p:placeholder="Insira email" />
+					</div>
+					<div class="form-group">
+						<h:inputText id="senha" class="form-control" value="#{usuarioMB.usuario.senha}" p:placeholder="Senha" />
+					</div>
+					<h:commandButton class="btn btn-success pull-right" value="Entrar" action="#{usuarioMB.autenticar}" />
+				</fieldset>
+			</h:form>
+		</div>
+	</div>
+	
+</h:body>
+</html>
