@@ -12,21 +12,16 @@
 </h:head>
 
 <h:body class="container">
-	<h:outputText class="alert-warning" rendered="#{usuarioMB.mensagem != null}" value="#{usuarioMB.mensagem}" />
-
-	<div class="col-xs-3 center-block">
-		<h1 class="">Hello World</h1>
-		<h:form>
-			<fieldset>
-				<h:inputText id="email" value="#{usuarioMB.usuario.email}"/>
-				<h:inputText id="senha" value="#{usuarioMB.usuario.senha}" />
-				<h:commandButton value="Entrar" action="#{usuarioMB.autenticar}" />
-			</fieldset>
-		</h:form>
+	<div class="row">
+		<div class="col-xs-6 col-xs-offset-3 text-center">
+			<div class="row">
+				<h:graphicImage class="img-responsive img-circle col-xs-6 col-xs-offset-3" value="/resources/img/myRadio-logo.png" />
+			</div>
+			<h1>Bem-vindo ao myRadio</h1>
+			<h:form>
+			<h:commandButton class="btn btn-primary" action="login" value="Acessar" />
+			</h:form>
+		</div>
 	</div>
-	
-	<h:form>
-		<h:commandLink value="Criar Usuário" action="#{usuarioMB.cadastrar}" />
-	</h:form>
 </h:body>
 </html>
