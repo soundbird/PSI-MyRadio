@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core">
+<f:view contentType="text/html" />
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Criar Usuário</title>
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputScript library="js" name="jquery-2.1.1.js" />
+	<h:outputScript library="js" name="bootstrap.js" />
+</h:head>
+<h:body>
+	<section class="container">
+		<h:form class="col-xs-6 col-xs-offset-3">
+			<h3>Certeza que quer excluir a conta?</h3>
+			<h:commandButton class="btn btn-danger btn-lg" value="Sim" action="#{usuarioMB.excluir}" />
+			<h:commandButton class="btn btn-default btn-lg" value="Não" action="/usuario?faces-redirect=true" />
+		</h:form>
+	</section>
+</h:body>
+</html>

@@ -59,7 +59,7 @@ public class UsuarioMB {
 		em.getTransaction().commit();
 		em.close();
 		usuario = new Usuario();
-		return "default?faces-redirect=true";
+		return "/default?faces-redirect=true";
 	}
 	
 }
