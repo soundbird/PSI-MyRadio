@@ -8,13 +8,35 @@
 	<meta charset="UTF-8" />
 	<title>Insert title here</title>
 	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputScript library="js" name="jquery-2.1.1.js" />
+	<h:outputScript library="js" name="bootstrap.js" />
 </h:head>
 
-<h:body class="container">
-	<p class="alert-success">Usuario #{usuarioMB.usuario.nome} #{usuarioMB.usuario.sobrenome} logado!</p>
-	<h:form>
-		<h:commandButton value="Excluir" action="#{usuarioMB.excluir}" />
-		<h:commandButton value="Alterar" action="usuario/alterar?faces-redirect=true" />
-	</h:form>
+<h:body>
+	<header class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header"></div>
+			<nav class="collapse navbar-collapse">
+				<h:form>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown">Conta <span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><h:commandLink value="Alterar" action="usuario/alterar?faces-redirect=true" /></li>
+								<li><h:commandLink value="Excluir" action="#{usuarioMB.excluir}" /></li>
+								<li class="divider"></li>
+								<li><h:commandLink value="Sair" action="#{loginMB.sair}" /></li>
+							</ul>
+						</li>
+					</ul>
+				</h:form>
+			</nav>
+		</div>
+	</header>
+	<section class="container">
+		<div class="row">
+			<h:outputText class="col-xs-8 col-xs-offset-2 alert alert-success" role="alert" value="Usuario #{usuarioMB.usuario.nome} #{usuarioMB.usuario.sobrenome} logado!"/>
+		</div>
+	</section>
 </h:body>
 </html>

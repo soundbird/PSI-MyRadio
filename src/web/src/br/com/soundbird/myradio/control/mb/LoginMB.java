@@ -15,7 +15,7 @@ import br.com.soundbird.myradio.model.dao.UsuarioDAO;
 public class LoginMB {
 	
 	@ManagedProperty(value = "#{usuarioMB}")
-	private UsuarioMB usuarioMB = null;
+	private UsuarioMB usuarioMB;
 
 	private Usuario usuario = new Usuario();
 	private String mensagem = null;
@@ -55,5 +55,10 @@ public class LoginMB {
 		}
 
 		return "";
+	}
+	
+	public String sair() {
+		usuarioMB.setUsuario(null);
+		return "default?faces-redirect=true";
 	}
 }
