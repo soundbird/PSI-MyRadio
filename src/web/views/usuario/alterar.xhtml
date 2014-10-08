@@ -7,21 +7,55 @@
 	<meta charset="UTF-8" />
 	<title>Alterar Usuário</title>
 	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputScript library="js" name="jquery-2.1.1.js" />
+	<h:outputScript library="js" name="bootstrap.js" />
 </h:head>
 <h:body>
-	<h:form>
-		<fieldset>
-			<h:outputLabel value="Nome:"  for="nome"/>
-			<h:inputText id="nome" value="#{usuarioMB.usuario.nome}" />
-			<h:outputLabel value="Sobrenome:"  for="sobrenome"/>
-			<h:inputText id="sobrenome" value="#{usuarioMB.usuario.sobrenome}" />
-			<h:outputLabel value="Email:"  for="email"/>
-			<h:inputText id="email" value="#{usuarioMB.usuario.email}" />
-			<h:outputLabel value="Senha:"  for="senha"/>
-			<h:inputText id="senha" value="#{usuarioMB.usuario.senha}" />
-			<h:commandButton value="Salvar" action="#{usuarioMB.atualizar}" />
-		</fieldset>
-	</h:form>
+	<header class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header"></div>
+			<nav class="collapse navbar-collapse">
+				<h:form>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown">Conta <span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><h:commandLink value="Alterar" action="usuario/alterar?faces-redirect=true" /></li>
+								<li><h:commandLink value="Excluir" action="#{usuarioMB.excluir}" /></li>
+								<li class="divider"></li>
+								<li><h:commandLink value="Sair" action="#{loginMB.sair}" /></li>
+							</ul>
+						</li>
+					</ul>
+				</h:form>
+			</nav>
+		</div>
+	</header>
+	<section class="container">
+		<div class="row">
+			<h:form class="col-xs-6 col-xs-offset-3" role="form">
+				<fieldset>
+					<div class="form-group">
+						<h:outputLabel value="Nome:"  for="nome"/>
+						<h:inputText id="nome" class="form-control" value="#{usuarioMB.usuario.nome}" />
+					</div>
+					<div class="form-group">
+						<h:outputLabel value="Sobrenome:"  for="sobrenome"/>
+						<h:inputText id="sobrenome" class="form-control" value="#{usuarioMB.usuario.sobrenome}" />
+					</div>
+					<div class="form-group">
+						<h:outputLabel value="Email:"  for="email"/>
+						<h:inputText id="email" class="form-control" value="#{usuarioMB.usuario.email}" />
+					</div>
+					<div class="form-group">
+						<h:outputLabel value="Senha:"  for="senha"/>
+						<h:inputSecret id="senha" class="form-control" value="#{usuarioMB.usuario.senha}" />
+					</div>
+					<h:commandButton class="btn btn-success pull-right" value="Salvar" action="#{usuarioMB.atualizar}" />
+				</fieldset>
+			</h:form>
+		</div>
+	</section>
 
 </h:body>
 </html>

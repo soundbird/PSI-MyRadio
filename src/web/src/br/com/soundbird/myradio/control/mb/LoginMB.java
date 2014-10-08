@@ -49,9 +49,11 @@ public class LoginMB {
 			if (usuario.autenticar(this.usuario)) {
 				usuarioMB.setUsuario(usuario);
 				return "usuario?faces-redirect=true";
+			} else {
+				this.mensagem = "Senha errada!";
 			}
 		} catch (NoResultException e) {
-			this.mensagem = "Erro ao logar!";
+			this.mensagem = "Usuário não encontrado!";
 		}
 
 		return "";

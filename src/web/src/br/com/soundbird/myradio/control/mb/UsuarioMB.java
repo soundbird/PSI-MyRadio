@@ -48,7 +48,7 @@ public class UsuarioMB {
 		dao.alterar(usuario);
 		em.getTransaction().commit();
 		em.close();
-		return "usuario?faces-redirect=true";
+		return "/usuario?faces-redirect=true";
 	}
 	
 	public String excluir(){
