@@ -46,7 +46,7 @@ public class Usuario {
 		this.email = email;
 	}
 	public String getSenha() {
-		return senha;
+		return "";
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
@@ -56,6 +56,10 @@ public class Usuario {
 	}
 	public void setDataCadastro(Calendar dataCadastro) {
 		this.dataCadastro = dataCadastro;
+	}
+	
+	public boolean autenticar(Usuario usuario) {
+		return this.senha.equals(usuario.senha);
 	}
 	
 }

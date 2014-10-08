@@ -5,18 +5,16 @@ import java.util.Calendar;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 
 import br.com.soundbird.myradio.model.bean.Usuario;
 import br.com.soundbird.myradio.model.dao.JPAUtil;
 import br.com.soundbird.myradio.model.dao.UsuarioDAO;
 
 @SessionScoped
-@ManagedBean
+@ManagedBean(name = "usuarioMB")
 public class UsuarioMB {
 
 	private Usuario usuario = new Usuario();
-	private String mensagem = null;
 	
 	public Usuario getUsuario() {
 		return usuario;
@@ -24,14 +22,6 @@ public class UsuarioMB {
 	
 	public void setUsuario(Usuario usuario){
 		this.usuario = usuario;
-	}
-	
-	public String getMensagem() {
-		return mensagem;
-	}
-
-	public void setMensagem(String mensagem) {
-		this.mensagem = mensagem;
 	}
 
 	public String salvar() {
@@ -49,24 +39,6 @@ public class UsuarioMB {
 	public String cadastrar() {
 		usuario = new Usuario();
 		return "CriaUsuario?faces-redirect=true";
-	}
-	
-	public String autenticar() {
-		EntityManager em = JPAUtil.getEntityManager();
-		UsuarioDAO dao = new UsuarioDAO(em);
-
-		try {
-			Usuario usuario = dao.consultarEmail(this.usuario.getEmail());
-			if (usuario.getSenha().equals(this.usuario.getSenha())) {
-				this.usuario = usuario;
-				this.mensagem = null;
-				return "usuario?faces-redirect=true";
-			}
-		} catch (NoResultException e) {
-			mensagem = "Erro ao logar!";
-		}
-
-		return "";
 	}
 
 	public String atualizar() {

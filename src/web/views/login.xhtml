@@ -13,10 +13,13 @@
 
 <h:body class="container">
 	<div class="row">
-		<h:outputText class="col-xs-8 col-xs-offset-2 alert-warning" rendered="#{usuarioMB.mensagem != null}" value="#{usuarioMB.mensagem}" />
-	<h:form class="col-xs-2 col-xs-offset-10">
-		<h:commandLink value="Criar Usuário" action="#{usuarioMB.cadastrar}" />
-	</h:form>
+		<h:form class="col-xs-2 col-xs-offset-10">
+			<h:commandLink value="Criar Usuário" action="#{usuarioMB.cadastrar}" />
+		</h:form>
+	</div>
+	
+	<div class="row">
+		<h:outputText class="col-xs-8 col-xs-offset-2 alert alert-warning" role="alert" rendered="#{loginMB.mensagem != null}" value="#{loginMB.mensagem}" />
 	</div>
 
 	<div class="row">
@@ -25,12 +28,12 @@
 			<h:form role="form">
 				<fieldset>
 					<div class="form-group">
-						<h:inputText id="email" class="form-control" value="#{usuarioMB.usuario.email}" p:placeholder="Insira email" />
+						<h:inputText id="email" class="form-control" value="#{loginMB.usuario.email}" p:placeholder="Insira email" />
 					</div>
 					<div class="form-group">
-						<h:inputText id="senha" class="form-control" value="#{usuarioMB.usuario.senha}" p:placeholder="Senha" />
+						<h:inputSecret id="senha" class="form-control" value="#{loginMB.usuario.senha}" p:placeholder="Senha" />
 					</div>
-					<h:commandButton class="btn btn-success pull-right" value="Entrar" action="#{usuarioMB.autenticar}" />
+					<h:commandButton class="btn btn-success pull-right" value="Entrar" action="#{loginMB.autenticar}" />
 				</fieldset>
 			</h:form>
 		</div>
