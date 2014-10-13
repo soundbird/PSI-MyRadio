@@ -36,20 +36,32 @@
 			<h:form class="col-xs-6 col-xs-offset-3" role="form">
 				<fieldset>
 					<div class="form-group">
-						<h:outputLabel value="Nome:"  for="nome"/>
-						<h:inputText id="nome" class="form-control" value="#{usuarioMB.usuario.nome}" />
+						<h:outputLabel value="Nome:" for="nome" />
+						<h:inputText id="nome" class="form-control" value="#{usuarioMB.usuario.nome}">
+							<f:validateLength minimum="3" />
+						</h:inputText>
+						<h:message for="nome" styleClass="text-danger"/>
 					</div>
 					<div class="form-group">
-						<h:outputLabel value="Sobrenome:"  for="sobrenome"/>
-						<h:inputText id="sobrenome" class="form-control" value="#{usuarioMB.usuario.sobrenome}" />
+						<h:outputLabel value="Sobrenome:" for="sobrenome" />
+						<h:inputText id="sobrenome" class="form-control" value="#{usuarioMB.usuario.sobrenome}">
+							<f:validateLength minimum="3" />
+						</h:inputText>
+						<h:message for="sobrenome" styleClass="text-danger"/>
 					</div>
 					<div class="form-group">
-						<h:outputLabel value="Email:"  for="email"/>
-						<h:inputText id="email" class="form-control" value="#{usuarioMB.usuario.email}" />
+						<h:outputLabel value="Email:" for="email" />
+						<h:inputText id="email" class="form-control" value="#{usuarioMB.usuario.email}">
+							<f:validateLength minimum="5" />
+						</h:inputText>
+						<h:message for="email" styleClass="text-danger"/>
 					</div>
 					<div class="form-group">
-						<h:outputLabel value="Senha:"  for="senha"/>
-						<h:inputSecret id="senha" class="form-control" value="#{usuarioMB.usuario.senha}" />
+						<h:outputLabel value="Senha:" for="senha" />
+						<h:inputSecret id="senha" class="form-control" value="#{usuarioMB.usuario.senha}">
+							<f:validateLength minimum="3"  />
+						</h:inputSecret>
+						<h:message for="senha" styleClass="text-danger" />
 					</div>
 					<h:commandButton class="btn btn-success pull-right" value="Salvar" action="#{usuarioMB.atualizar}" />
 				</fieldset>
