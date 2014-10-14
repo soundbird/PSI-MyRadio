@@ -8,5 +8,5 @@ public interface ITocador {
 	public void pausar();
 	public void parar();
 	public boolean tocando(ITocavel tocavel);
-	public void setOnPausedListener(OnPausedListener onEndedListener);
+	public void setOnStateChangedListener(OnStateChangedListener onStateChangedListener);
 }

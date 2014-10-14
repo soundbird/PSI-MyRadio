@@ -12,7 +12,7 @@ public class Tocador extends Binder implements ITocador, OnCompletionListener {
 	
 	private ITocavel mTocando;
 	
-	private OnPausedListener mOnPausedListener; 
+	private OnStateChangedListener mOnStateChangedListener; 
 	
 	public Tocador() {
 		mMediaPlayer.setOnCompletionListener(this);
@@ -21,13 +21,14 @@ public class Tocador extends Binder implements ITocador, OnCompletionListener {
 	@Override
 	public void tocar() {
 		mMediaPlayer.start();
+		
+		onStarted();
 	}
 
 	@Override
 	public void tocar(ITocavel tocavel) {
-		if (!tocando(tocavel)) {
+		if (!tocavelCarregado(tocavel)) {
 			pausar();
-			mOnPausedListener = null;
 			
 			mMediaPlayer.reset();
 			try {
@@ -60,8 +61,11 @@ public class Tocador extends Binder implements ITocador, OnCompletionListener {
 
 	@Override
 	public boolean tocando(ITocavel tocavel) {
-		return mMediaPlayer.isPlaying() &&
-				mTocando != null && mTocando.getClass() == tocavel.getClass() && mTocando.getId() == tocavel.getId();
+		return mMediaPlayer.isPlaying() && tocavelCarregado(tocavel);
+	}
+	
+	private boolean tocavelCarregado(ITocavel tocavel) {
+		return mTocando != null && mTocando.getClass() == tocavel.getClass() && mTocando.getId() == tocavel.getId();
 	}
 	
 	public void fechar() {
@@ -81,15 +85,21 @@ public class Tocador extends Binder implements ITocador, OnCompletionListener {
 	}
 	
 	private void onPaused() {
-		if (mOnPausedListener != null) {
-			mOnPausedListener.onPaused();
+		if (mOnStateChangedListener != null) {
+			mOnStateChangedListener.onPaused();
+		}
+	}
+	
+	private void onStarted() {
+		if (mOnStateChangedListener != null) {
+			mOnStateChangedListener.onStarted();
 		}
 	}
 
 	@Override
-	public void setOnPausedListener(
-			OnPausedListener onPausedListener) {
-		this.mOnPausedListener = onPausedListener;
+	public void setOnStateChangedListener(
+			OnStateChangedListener onStateChangedListener) {
+		this.mOnStateChangedListener = onStateChangedListener;
 	}
 
 }

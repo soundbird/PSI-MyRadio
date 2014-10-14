@@ -1,11 +1,7 @@
 package br.com.soundbird.myradio.mobile;
 
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,16 +12,13 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 import br.com.soundbird.myradio.mobile.model.Musica;
 import br.com.soundbird.myradio.mobile.model.MyRadioCache;
-import br.com.soundbird.myradio.mobile.service.TocadorService;
-import br.com.soundbird.myradio.mobile.tocador.ITocador;
-import br.com.soundbird.myradio.mobile.tocador.OnPausedListener;
 
 /**
  * A fragment representing a single Music detail screen. This fragment is either
  * contained in a {@link MusicListActivity} in two-pane mode (on tablets) or a
  * {@link MusicDetailActivity} on handsets.
  */
-public class MusicDetailFragment extends Fragment implements ServiceConnection {
+public class MusicDetailFragment extends Fragment {
 	/**
 	 * The fragment argument representing the item ID that this fragment
 	 * represents.
@@ -35,8 +28,6 @@ public class MusicDetailFragment extends Fragment implements ServiceConnection {
 	private Musica mMusica;
 	
 	private ToggleButton mTocarPausar;
-	
-	private ITocador mTocador;
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -56,8 +47,6 @@ public class MusicDetailFragment extends Fragment implements ServiceConnection {
 			mMusica = MyRadioCache.lista.getMusica(getArguments().getInt(
 					ARG_ITEM_ID));
 		}
-		
-		getActivity().bindService(new Intent(getActivity(), TocadorService.class), this, Context.BIND_AUTO_CREATE);
 	}
 
 	@Override
@@ -75,48 +64,23 @@ public class MusicDetailFragment extends Fragment implements ServiceConnection {
 		mTocarPausar = (ToggleButton) rootView.findViewById(R.id.botao_tocar);
 		
 		mTocarPausar
-			.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-				
-				@Override
-				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					if (isChecked) {
-						mTocador.tocar(mMusica);
-						
-						mTocador.setOnPausedListener(new MusicaTerminada());
-					} else {
-						mTocador.pausar();
-					}
-					
-				}
-			});
+			.setOnCheckedChangeListener(new BotaoTocarListener());
 
 		return rootView;
 	}
 	
-	@Override
-	public void onDestroyView() {
-		getActivity().unbindService(this);
-		super.onDestroyView();
-	}
-
-	@Override
-	public void onServiceConnected(ComponentName name, IBinder service) {
-		mTocador = (ITocador) service;
-		
-		mTocarPausar.setChecked(mTocador.tocando(mMusica));
-	}
-
-	@Override
-	public void onServiceDisconnected(ComponentName name) {
-		mTocador = null;
-	}
-	
-	private class MusicaTerminada implements OnPausedListener {
+	private class BotaoTocarListener implements OnCheckedChangeListener {
 		
 		@Override
-		public void onPaused() {
-			mTocarPausar.setChecked(false);
+		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+			
+			if (isChecked) {
+				MyRadioCache.tocavel = mMusica;
+				Intent playerIntent = new Intent(getActivity(), PlayerActivity.class);
+				startActivity(playerIntent);
+			} else {
+			}
+
 		}
-		
 	}
 }
