@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.ToggleButton;
 import br.com.soundbird.myradio.mobile.model.MyRadioCache;
 import br.com.soundbird.myradio.mobile.service.TocadorService;
@@ -52,6 +53,7 @@ public class PlayerFragment extends Fragment implements ServiceConnection {
 		
 		mTocarPausar = (ToggleButton) rootView.findViewById(R.id.botao_tocar_pausar);
 		
+		mBarraTocando.setOnSeekBarChangeListener(new BarraTocandoListener());
 		mTocarPausar.setOnCheckedChangeListener(new BotaoTocarListener());
 		
 		return rootView;
@@ -75,6 +77,26 @@ public class PlayerFragment extends Fragment implements ServiceConnection {
 	@Override
 	public void onServiceDisconnected(ComponentName name) {
 		mTocador = null;
+	}
+	
+	private class BarraTocandoListener implements OnSeekBarChangeListener {
+
+		@Override
+		public void onProgressChanged(SeekBar seekBar, int progress,
+				boolean fromUser) {
+			if (fromUser) {
+				mTocador.pular(progress);
+			}
+		}
+
+		@Override
+		public void onStartTrackingTouch(SeekBar seekBar) {
+		}
+
+		@Override
+		public void onStopTrackingTouch(SeekBar seekBar) {
+		}
+		
 	}
 	
 	private class BotaoTocarListener implements OnCheckedChangeListener {
@@ -103,6 +125,16 @@ public class PlayerFragment extends Fragment implements ServiceConnection {
 		@Override
 		public void onStarted() {
 			mTocarPausar.setChecked(true);
+		}
+
+		@Override
+		public void onInfoChanged(int duration) {
+			mBarraTocando.setMax(duration);
+		}
+
+		@Override
+		public void onProgressChanged(int progress) {
+			mBarraTocando.setProgress(progress);
 		}
 		
 	}

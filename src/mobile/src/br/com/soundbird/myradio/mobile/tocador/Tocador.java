@@ -3,16 +3,23 @@ package br.com.soundbird.myradio.mobile.tocador;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Binder;
+import android.os.Handler;
 import android.util.Log;
 import br.com.soundbird.myradio.mobile.MyRadioApp;
 
 public class Tocador extends Binder implements ITocador, OnCompletionListener {
 
+	public static final long PROGRESS_DELAY = 200;
+
 	private final MediaPlayer mMediaPlayer = new MediaPlayer();
 	
 	private ITocavel mTocando;
 	
-	private OnStateChangedListener mOnStateChangedListener; 
+	private OnStateChangedListener mOnStateChangedListener;
+	
+	private final Handler mProgressHandler = new Handler();
+	
+	private final Runnable mProgress = new ProgressUpdate();
 	
 	public Tocador() {
 		mMediaPlayer.setOnCompletionListener(this);
@@ -21,6 +28,8 @@ public class Tocador extends Binder implements ITocador, OnCompletionListener {
 	@Override
 	public void tocar() {
 		mMediaPlayer.start();
+		
+		mProgressHandler.post(mProgress);
 		
 		onStarted();
 	}
@@ -41,6 +50,7 @@ public class Tocador extends Binder implements ITocador, OnCompletionListener {
 			} catch (Exception e) {
 				Log.d("MyRadio", "Erro ao preparar", e);
 			}
+			onInfoChanged();
 			mTocando = tocavel;
 		}
 		
@@ -51,12 +61,22 @@ public class Tocador extends Binder implements ITocador, OnCompletionListener {
 	public void pausar() {
 		mMediaPlayer.pause();
 		
+		mProgressHandler.removeCallbacks(mProgress);
+		
 		onPaused();
+		onProgressChanged();
 	}
 
 	@Override
 	public void parar() {
 		mMediaPlayer.stop();
+	}
+
+	@Override
+	public void pular(int posicao) {
+		mMediaPlayer.seekTo(posicao);
+		
+		onProgressChanged();
 	}
 
 	@Override
@@ -79,9 +99,9 @@ public class Tocador extends Binder implements ITocador, OnCompletionListener {
 		
 		if (mTocando != null) {
 			tocar(mTocando);
+		} else {
+			pausar();
 		}
-		
-		onPaused();
 	}
 	
 	private void onPaused() {
@@ -95,11 +115,33 @@ public class Tocador extends Binder implements ITocador, OnCompletionListener {
 			mOnStateChangedListener.onStarted();
 		}
 	}
+	
+	private void onInfoChanged() {
+		if (mOnStateChangedListener != null) {
+			mOnStateChangedListener.onInfoChanged(mMediaPlayer.getDuration());
+		}
+	}
+	
+	private void onProgressChanged() {
+		if (mOnStateChangedListener != null) {
+			mOnStateChangedListener.onProgressChanged(mMediaPlayer.getCurrentPosition());
+		}
+	}
 
 	@Override
 	public void setOnStateChangedListener(
 			OnStateChangedListener onStateChangedListener) {
 		this.mOnStateChangedListener = onStateChangedListener;
+	}
+	
+	private class ProgressUpdate implements Runnable {
+
+		@Override
+		public void run() {
+			onProgressChanged();
+			mProgressHandler.postDelayed(mProgress, PROGRESS_DELAY);
+		}
+		
 	}
 
 }
