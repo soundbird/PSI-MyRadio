@@ -88,14 +88,37 @@ public class MusicaDao implements IDao<Musica> {
 
 	@Override
 	public void update(Musica entidade) {
-		// TODO Auto-generated method stub
+		SQLiteDatabase db = mDbHelper.getWritableDatabase();
 		
+		ContentValues valores = new ContentValues();
+		valores.put(COLUMN_NAME_NOME, entidade.getNome());
+		valores.put(COLUMN_NAME_LOCAL, entidade.getLocal().toString());
+		valores.put(COLUMN_NAME_ARTISTA, entidade.getArtista());
+		valores.put(COLUMN_NAME_ALBUM, entidade.getAlbum());
+		valores.put(COLUMN_NAME_ESTILO, entidade.getEstilo());
+		valores.put(COLUMN_NAME_ANO, entidade.getAno());
+		valores.put(COLUMN_NAME_DURACAO, entidade.getDuracao());
+		
+		String whereClause = COLUMN_NAME_MUSICA_ID + " = ?";
+		String[] whereValues = {
+			String.valueOf(entidade.getId())
+		};
+		
+		db.update(TABLE_NAME, valores, whereClause, whereValues);
+		db.close();
 	}
 
 	@Override
 	public void delete(Musica entidade) {
-		// TODO Auto-generated method stub
+		SQLiteDatabase db = mDbHelper.getWritableDatabase();
 		
+		String whereClause = COLUMN_NAME_MUSICA_ID + " = ?";
+		String[] whereValues = {
+			String.valueOf(entidade.getId())
+		};
+		
+		db.delete(TABLE_NAME, whereClause, whereValues);
+		db.close();
 	}
 
 	@Override
