@@ -13,6 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
 import android.widget.ToggleButton;
+import br.com.soundbird.myradio.mobile.infra.MyRadioDbHelper;
 import br.com.soundbird.myradio.mobile.model.Musica;
 import br.com.soundbird.myradio.mobile.model.MyRadioCache;
 
@@ -82,6 +83,12 @@ public class MusicListFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		MyRadioDbHelper dbHelper = new MyRadioDbHelper(getActivity());
+		
+		for (Musica musica : dbHelper.musicaDao.query()) {
+			MyRadioCache.lista.adicionarMusica(musica);
+		}
 		
 		mMusicAdapter = new ArrayAdapter<Musica>(getActivity(),
 			android.R.layout.simple_list_item_activated_1,

@@ -5,23 +5,31 @@ import android.net.Uri;
 
 public class Musica implements ITocavel {
 	
-	private static long sCounter = 0;
-
+	// ITocavel
 	private long mId;
 	private String mNome;
 	private Uri mLocal;
 	
-	public Musica(String nome, Uri local) {
-		super();
-		this.mId = ++sCounter;
-		this.mNome = nome;
-		this.mLocal = local;
+	// Musica
+	private String mArtista;
+	private String mAlbum;
+	private String mEstilo;
+	private int mAno;
+	private int mDuracao;
+	
+	public Musica(long id) {
+		this.mId = id;
+	}
+
+	@Override
+	public ITocavel getProx() {
+		return null;
 	}
 	
 	@Override
 	public String toString() {
 		return this.mNome;
-	};
+	}
 	
 	@Override
 	public long getId() {
@@ -40,9 +48,34 @@ public class Musica implements ITocavel {
 	public void setLocal(Uri local) {
 		this.mLocal = local;
 	}
-
-	@Override
-	public ITocavel getProx() {
-		return null;
+	public String getArtista() {
+		return mArtista;
+	}
+	public void setArtista(String mArtista) {
+		this.mArtista = mArtista;
+	}
+	public String getAlbum() {
+		return mAlbum;
+	}
+	public void setAlbum(String mAlbum) {
+		this.mAlbum = mAlbum;
+	}
+	public String getEstilo() {
+		return mEstilo;
+	}
+	public void setEstilo(String mEstilo) {
+		this.mEstilo = mEstilo;
+	}
+	public int getAno() {
+		return mAno;
+	}
+	public void setAno(int mAno) {
+		this.mAno = mAno;
+	}
+	public int getDuracao() {
+		return mDuracao;
+	}
+	public void setDuracao(int mDuracao) {
+		this.mDuracao = mDuracao;
 	}
 }
