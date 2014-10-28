@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
@@ -57,8 +60,18 @@ public class MusicDetailFragment extends Fragment {
 
 		// Show the dummy content as text in a TextView.
 		if (mMusica != null) {
-			((TextView) rootView.findViewById(R.id.music_detail))
+			((TextView) rootView.findViewById(R.id.music_nome))
 					.setText(mMusica.getNome());
+			((TextView) rootView.findViewById(R.id.music_artista))
+					.setText(mMusica.getArtista());
+			((TextView) rootView.findViewById(R.id.music_album))
+					.setText(mMusica.getAlbum());
+			((TextView) rootView.findViewById(R.id.music_ano))
+					.setText(String.valueOf(mMusica.getAno()));
+			((TextView) rootView.findViewById(R.id.music_estilo))
+					.setText(mMusica.getEstilo());
+			((TextView) rootView.findViewById(R.id.music_duracao))
+					.setText(String.valueOf(mMusica.getDuracao()));
 		}
 		
 		mTocarPausar = (ToggleButton) rootView.findViewById(R.id.botao_tocar);
@@ -67,6 +80,26 @@ public class MusicDetailFragment extends Fragment {
 			.setOnCheckedChangeListener(new BotaoTocarListener());
 
 		return rootView;
+	}
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.musicas, menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int id = item.getItemId();
+		
+		switch (id) {
+		case R.id.adicionar_musicas:
+			break;
+
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+		
+		return true;
 	}
 	
 	private class BotaoTocarListener implements OnCheckedChangeListener {

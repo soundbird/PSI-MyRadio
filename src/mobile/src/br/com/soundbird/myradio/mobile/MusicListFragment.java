@@ -84,12 +84,6 @@ public class MusicListFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		MyRadioDbHelper dbHelper = new MyRadioDbHelper(getActivity());
-		
-		for (Musica musica : dbHelper.musicaDao.query()) {
-			MyRadioCache.lista.adicionarMusica(musica);
-		}
-		
 		mMusicAdapter = new ArrayAdapter<Musica>(getActivity(),
 			android.R.layout.simple_list_item_activated_1,
 			android.R.id.text1, MyRadioCache.lista.getMusicas());

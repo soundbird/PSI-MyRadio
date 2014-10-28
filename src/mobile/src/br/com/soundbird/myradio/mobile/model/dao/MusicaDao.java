@@ -55,9 +55,19 @@ public class MusicaDao implements IDao<Musica> {
 		
 		musica1.put(COLUMN_NAME_NOME, "Some Sort of Creature");
 		musica1.put(COLUMN_NAME_LOCAL, "android.resource://br.com.soundbird.myradio.mobile/" + R.raw.some_sort_of_creature);
+		musica1.put(COLUMN_NAME_ARTISTA, "Awolnation");
+		musica1.put(COLUMN_NAME_ALBUM, "Megalithic Symphony (Advance)");
+		musica1.put(COLUMN_NAME_ESTILO, "Eletrônica");
+		musica1.put(COLUMN_NAME_ANO, 2011);
+		musica1.put(COLUMN_NAME_DURACAO, 26);
 
 		musica2.put(COLUMN_NAME_NOME, "Lumaban Ka");
 		musica2.put(COLUMN_NAME_LOCAL, "android.resource://br.com.soundbird.myradio.mobile/" + R.raw.lumaban_ka);
+		musica2.put(COLUMN_NAME_ARTISTA, "Kalayo");
+		musica2.put(COLUMN_NAME_ALBUM, "Kalayo-Malaya");
+		musica2.put(COLUMN_NAME_ESTILO, "Outros");
+		musica2.put(COLUMN_NAME_ANO, 2011);
+		musica2.put(COLUMN_NAME_DURACAO, 264);
 		
 		db.insert(TABLE_NAME, null, musica1);
 		db.insert(TABLE_NAME, null, musica2);
