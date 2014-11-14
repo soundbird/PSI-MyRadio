@@ -7,5 +7,12 @@
     <string name="pausar">Pausar</string>
     <string name="title_activity_player">PlayerActivity</string>
     <string name="adicionar_musicas">Adicionar Músicas</string>
+    <string name="music_nome">Música</string>
+    <string name="music_artista">Artista</string>
+    <string name="music_album">Album</string>
+    <string name="music_ano">Ano</string>
+    <string name="music_estilo">Estilo</string>
+    <string name="music_duracao">Duração</string>
+    <string name="salvar">Salvar</string>
 
 </resources>
